@@ -77,3 +77,82 @@ function GalleryArchitecture() {
             <circleGeometry args={[0.2, 16]} />
             <meshBasicMaterial color={[2.2, 1.8, 1.4]} toneMapped={false} />
           </mesh>
+        </group>
+      ))}
+
+      {/* Curved End Pavilion Wall */}
+      <mesh position={[-16, 4, 3]} rotation={[0, Math.PI / 3, 0]} receiveShadow>
+        <planeGeometry args={[14, 9]} />
+        <meshStandardMaterial color="#EFE9DE" roughness={0.9} />
+      </mesh>
+      <mesh position={[16, 4, 3]} rotation={[0, -Math.PI / 3, 0]} receiveShadow>
+        <planeGeometry args={[14, 9]} />
+        <meshStandardMaterial color="#EFE9DE" roughness={0.9} />
+      </mesh>
+
+      {/* Top Architectural Cornice & Concealed Linear Warm Uplight */}
+      <mesh position={[0, 4.2, -1.05]} castShadow receiveShadow>
+        <boxGeometry args={[70, 0.22, 0.75]} />
+        <meshStandardMaterial color="#E8DFD0" roughness={0.85} />
+      </mesh>
+      <mesh position={[0, 4.12, -0.68]} rotation={[Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[70, 0.05]} />
+        <meshBasicMaterial color={[2.8, 2.2, 1.6]} toneMapped={false} />
+      </mesh>
+
+      {/* Architectural Base Skirting in Sandstone */}
+      <mesh position={[0, 0.08, -1.35]} receiveShadow>
+        <boxGeometry args={[70, 0.16, 0.08]} />
+        <meshStandardMaterial color="#C7B8A2" map={sandstone} roughness={0.8} />
+      </mesh>
+    </group>
+  )
+}
+
+const PLINTH_X = [-5.55, -3.7, -1.85, 0, 1.85, 3.7]
+
+function ExhibitionPlinths() {
+  const sandstone = useMemo(() => getAarnaTexture('sandstone'), [])
+  const plinthMat = useMemo(
+    () => new THREE.MeshStandardMaterial({ color: '#D6C8B4', map: sandstone, roughness: 0.82 }),
+    [sandstone],
+  )
+
+  return (
+    <group>
+      {/* Sculptural stone plinth beneath each garment position */}
+      {PLINTH_X.map((xPos, i) => {
+        return (
+          <group key={i} position={[xPos, 0, 0]}>
+            {/* Minimalist Cylindrical Sandstone Pedestal */}
+            <mesh position={[0, 0.09, 0]} receiveShadow castShadow>
+              <cylinderGeometry args={[0.54, 0.58, 0.18, 36]} />
+              <primitive object={plinthMat} attach="material" />
+            </mesh>
+            {/* Inner Plinth Inset Rim in Antique Brass */}
+            <mesh position={[0, 0.182, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+              <ringGeometry args={[0.46, 0.49, 36]} />
+              <meshStandardMaterial color="#C5A059" metalness={0.7} roughness={0.3} />
+            </mesh>
+            {/* Plinth Uplight Glow Disc */}
+            <mesh position={[0, 0.184, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+              <circleGeometry args={[0.18, 24]} />
+              <meshBasicMaterial color={[1.8, 1.5, 1.1]} toneMapped={false} transparent opacity={0.35} />
+            </mesh>
+          </group>
+        )
+      })}
+    </group>
+  )
+}
+
+export default function GalleryRoom({ reflect }) {
+  return (
+    <group>
+      <GalleryFloor reflect={reflect} />
+      <GalleryArchitecture />
+      <ExhibitionPlinths />
+    </group>
+  )
+}
+

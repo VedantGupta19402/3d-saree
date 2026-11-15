@@ -77,3 +77,82 @@ function GalleryScene() {
     prepareScene()
       .then(() => alive && setPrepared(true))
       .catch((error) => {
+        console.error('[AARNA] Failed to prepare scene:', error)
+        useCloset.getState().setSceneError(error)
+      })
+    return () => {
+      alive = false
+    }
+  }, [])
+
+  return (
+    <Canvas
+      shadows
+      dpr={dpr}
+      camera={{ fov: 34, near: 0.1, far: 55, position: [2.4, 4.2, 12.5] }}
+      gl={{
+        antialias: true,
+        powerPreference: 'high-performance',
+        toneMapping: THREE.ACESFilmicToneMapping,
+        toneMappingExposure: 1.08,
+      }}
+      style={{ touchAction: 'pan-y' }}
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener('webglcontextlost', (e) => e.preventDefault())
+      }}
+    >
+      <PerformanceMonitor
+        onIncline={() => setDpr(Math.min(window.devicePixelRatio, compact ? 1.5 : 2))}
+        onDecline={() => {
+          setDpr(1)
+          setHigh(false)
+        }}
+      />
+      <color attach="background" args={[BG]} />
+      <fog attach="fog" args={[BG, 10, 32]} />
+
+      {prepared && (
+        <Suspense fallback={null}>
+          <GalleryLights shadowSize={compact ? 1024 : 2048} />
+          <GalleryRoom reflect={high} />
+          <SuspensionBeam />
+          
+          {garments.map((item, i) => (
+            <AarnaGarment key={item.id} item={item} index={i} />
+          ))}
+
+          {/* Ambient atmospheric dust / floating sunlight motes */}
+          <Sparkles
+            count={compact ? 35 : 75}
+            scale={[12, 3.5, 4]}
+            position={[0, 1.8, 0.8]}
+            size={1.8}
+            speed={0.2}
+            opacity={0.38}
+            color="#F6E7D2"
+          />
+          <GalleryReadySignal />
+        </Suspense>
+      )}
+
+      <RailControls />
+      <AarnaCameraRig />
+    </Canvas>
+  )
+}
+
+export default function GalleryExperience() {
+  const [supported] = useState(hasWebGL)
+
+  useEffect(() => {
+    if (!supported) useCloset.getState().setSceneError(new Error('WebGL is not supported'))
+  }, [supported])
+
+  if (!supported) return <GalleryFallback />
+
+  return (
+    <GalleryBoundary>
+      <GalleryScene />
+    </GalleryBoundary>
+  )
+}

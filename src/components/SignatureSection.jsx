@@ -70,3 +70,74 @@ export default function SignatureSection() {
                   <span>AARNA 3D ATELIER</span>
                   <span className="sig-card__live-indicator">● LIVE 3D</span>
                 </div>
+
+                <div className="sig-card__art-frame">
+                  <div className="sig-card__arch-shape">
+                    <span className="sig-card__roman">0{i + 1}</span>
+                    <h3 className="sig-card__visual-title">{sig.item.name}</h3>
+                    <p className="sig-card__visual-category">{sig.item.category}</p>
+                  </div>
+                </div>
+
+                <div className="sig-card__palette">
+                  {sig.heroPalette.map((hex) => (
+                    <span
+                      key={hex}
+                      className="sig-card__chip"
+                      style={{ background: hex }}
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Editorial Story Details */}
+              <div className="sig-card__content">
+                <div className="sig-card__eyebrow">
+                  <span>{sig.editorialNum}</span>
+                  <span className="sig-card__origin">{sig.item.specs.Origin}</span>
+                </div>
+
+                <h3 className="sig-card__headline">{sig.quote}</h3>
+                <p className="sig-card__body">{sig.highlight}</p>
+
+                <div className="sig-card__specs-table">
+                  <div className="sig-spec">
+                    <span className="sig-spec__label">Material</span>
+                    <span className="sig-spec__val">{sig.item.specs.Material}</span>
+                  </div>
+                  <div className="sig-spec">
+                    <span className="sig-spec__label">Artisan Time</span>
+                    <span className="sig-spec__val">{sig.item.specs.Hours}</span>
+                  </div>
+                  <div className="sig-spec">
+                    <span className="sig-spec__label">Price</span>
+                    <span className="sig-spec__val sig-spec__price">
+                      {currency === 'USD' ? formatPrice(sig.item.price) : formatInr(sig.item.price)}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="sig-card__actions">
+                  <button
+                    className="btn btn--solid"
+                    onClick={() => handleInspect(sig.item.id)}
+                  >
+                    Inspect 3D Silhouette
+                  </button>
+                  <button
+                    className="btn btn--ghost"
+                    onClick={() => useCloset.getState().addToBag(sig.item)}
+                  >
+                    Add to Atelier Bag
+                  </button>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+

@@ -88,3 +88,94 @@ export default function AarnaNavbar() {
             </button>
 
             <button
+              className="aarna-nav__action aarna-nav__enquiry-btn"
+              onClick={() => toggleEnquiry(true)}
+            >
+              Enquiries
+            </button>
+
+            <button
+              className="aarna-nav__bag-btn"
+              onClick={() => toggleBag(true)}
+              aria-label={`Shopping bag containing ${bagCount} items`}
+            >
+              <span className="aarna-nav__bag-text">Bag</span>
+              <span className="aarna-nav__bag-badge">{bagCount}</span>
+            </button>
+
+            {/* Mobile Menu Hamburger */}
+            <button
+              className={`aarna-nav__burger ${mobileOpen ? 'is-active' : ''}`}
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileOpen}
+            >
+              <span />
+              <span />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Full-screen Editorial Mobile Navigation Drawer */}
+      <div
+        className={`aarna-drawer ${mobileOpen ? 'is-open' : ''}`}
+        aria-hidden={!mobileOpen}
+        data-lenis-prevent
+      >
+        <div className="aarna-drawer__backdrop" onClick={() => setMobileOpen(false)} />
+        <div className="aarna-drawer__panel">
+          <div className="aarna-drawer__head">
+            <span className="aarna-drawer__brand">AARNA</span>
+            <button
+              className="aarna-drawer__close"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="aarna-drawer__links">
+            {NAV_LINKS.map(([id, label], i) => (
+              <button
+                key={id}
+                className="aarna-drawer__link"
+                style={{ '--i': i }}
+                onClick={() => handleNavClick(id)}
+              >
+                <span className="aarna-drawer__num">0{i + 1}</span>
+                <span className="aarna-drawer__title">{label}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="aarna-drawer__footer">
+            <div className="aarna-drawer__actions">
+              <button
+                className="btn btn--solid btn--wide"
+                onClick={() => {
+                  setMobileOpen(false)
+                  toggleEnquiry(true)
+                }}
+              >
+                Private Atelier Consultation
+              </button>
+              <button
+                className="btn btn--ghost btn--wide"
+                onClick={() => {
+                  setMobileOpen(false)
+                  toggleBag(true)
+                }}
+              >
+                View Atelier Bag ({bagCount})
+              </button>
+            </div>
+            <p className="aarna-drawer__meta">New Delhi · Mumbai · London</p>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+

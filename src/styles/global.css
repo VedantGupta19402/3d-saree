@@ -606,3 +606,104 @@ main#scroll-root.is-inspecting {
   font-family: var(--serif);
 }
 
+.aarna-drawer__title {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--espresso);
+}
+
+.aarna-drawer__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.aarna-drawer__meta {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ───────── 01. Hero Section ───────── */
+
+.hero-aarna {
+  min-height: 100vh;
+  justify-content: space-between;
+  padding-top: 130px;
+}
+
+.hero-aarna__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted-olive);
+  font-weight: 500;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+  pointer-events: auto;
+}
+
+.hero-aarna__editorial {
+  max-width: 860px;
+  margin-top: auto;
+  margin-bottom: auto;
+  pointer-events: auto;
+}
+
+.hero-aarna__title {
+  font-size: clamp(48px, 8.5vw, 120px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--espresso);
+  margin-bottom: 24px;
+}
+
+.hero-line {
+  display: block;
+  overflow: hidden;
+}
+
+.hero-line > span {
+  display: block;
+}
+
+.hero-aarna__subtext {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-style: italic;
+  color: var(--deep-forest);
+  margin-bottom: 16px;
+}
+
+.hero-aarna__lede {
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.68;
+  color: var(--muted);
+  max-width: 580px;
+  margin-bottom: 32px;
+}
+
+.hero-aarna__cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-aarna__foot {
+  display: flex;
+  justify-content: center;
+  padding: 24px 0 0;
+  pointer-events: auto;
+}
+
+.hero-aarna__scroll-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;

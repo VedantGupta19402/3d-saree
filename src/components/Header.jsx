@@ -16,11 +16,11 @@ export default function Header() {
 
   return (
     <header className={`header ${ready ? 'is-ready' : ''} ${inspecting ? 'is-dim' : ''}`}>
-      <button className="brand" onClick={() => scrollToId('hero')} aria-label="FERROVA, back to top">
+      <button className="brand" onClick={() => scrollToId('hero')} aria-label="SHINCHAN, back to top">
         <span className="brand__mark" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M3 6h18M12 6v3.2M5 18l7-8.4 7 8.4z" /></svg>
         </span>
-        FERROVA
+        SHINCHAN
       </button>
       <nav className="nav" aria-label="Sections">
         {LINKS.map(([id, label]) => (

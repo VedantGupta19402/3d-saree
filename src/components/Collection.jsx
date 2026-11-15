@@ -13,9 +13,9 @@ export default function Collection() {
     <section id="collection" className="section collection" ref={root}>
       <div className="panel collection__panel">
         <div className="collection__head" data-reveal>
-          <p className="eyebrow">03 — The collection</p>
+          <p className="eyebrow">03 — The Collection</p>
           <h2 className="display">
-            Nine pieces, <em>one rail.</em>
+            Nine signatures, <em>one rail.</em>
           </h2>
         </div>
         <ol className="list">

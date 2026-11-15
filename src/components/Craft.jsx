@@ -13,13 +13,12 @@ export default function Craft() {
   return (
     <section id="craft" className="section craft" ref={root}>
       <div className="panel craft__panel">
-        <p className="eyebrow" data-reveal>02 — Craft</p>
+        <p className="eyebrow" data-reveal>02 — Craftsmanship</p>
         <h2 className="display" data-reveal>
-          Fabric you can <em>almost</em> feel.
+          Fabric you can <em>almost</em> touch.
         </h2>
         <p className="body" data-reveal>
-          A flat product grid hides everything that makes clothing worth touching. Here drape, weight and finish are back
-          on the rail, and every piece reacts to your hand.
+          A static product catalog hides everything that makes fine tailoring worth feeling. Here drape, weight and tactile texture come alive on the rail, reacting organically to your touch.
         </p>
         <ul className="features">
           {FEATURES.map(([n, title, text]) => (

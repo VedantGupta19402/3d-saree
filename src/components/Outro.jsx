@@ -17,7 +17,7 @@ export default function Outro() {
         </div>
       </div>
       <footer className="footer" data-reveal>
-        <span>© 2026 FERROVA</span>
+        <span>© 2026 SHINCHAN</span>
         <span>React · Three.js · R3F · GSAP</span>
         <span>Drag · Tap · Arrow keys · Esc</span>
       </footer>

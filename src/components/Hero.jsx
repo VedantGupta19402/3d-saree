@@ -32,17 +32,16 @@ export default function Hero() {
   return (
     <section id="hero" className="section hero" ref={root}>
       <div className="hero__top" data-hero>
-        <span>FW—26 · Interactive collection</span>
+        <span>FW—27 · Curated capsule</span>
         <span>{String(garments.length).padStart(2, '0')} pieces · Real-time 3D</span>
       </div>
       <div className="hero__copy">
         <h1 className="hero__title">
-          <span className="hero__line"><span>The Digital</span></span>
-          <span className="hero__line"><span><em>Closet</em></span></span>
+          <span className="hero__line"><span>The Living</span></span>
+          <span className="hero__line"><span><em>Atelier</em></span></span>
         </h1>
         <p className="hero__lede" data-hero>
-          Browse a wardrobe the way you would in the atelier. Slide pieces along the rail, pull one off and turn it in
-          the light.
+          Browse a bespoke wardrobe the way you would in a private atelier. Slide pieces along the rail, pull one forward, and turn it in the light.
         </p>
         <div className="hero__cta" data-hero>
           <button className="btn btn--solid" onClick={pull}>Pull a piece</button>

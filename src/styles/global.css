@@ -302,3 +302,104 @@ main#scroll-root.is-inspecting {
   margin-bottom: 22px;
   font-weight: 500;
 }
+
+.opening__brand {
+  font-family: var(--serif);
+  font-size: clamp(64px, 12vw, 132px);
+  letter-spacing: 0.28em;
+  line-height: 0.95;
+  color: var(--espresso);
+  display: flex;
+  gap: 0.12em;
+  margin-bottom: 34px;
+}
+
+.opening__letter {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.opening__meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.opening__track {
+  width: 140px;
+  height: 2px;
+  background: rgba(48, 39, 32, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.opening__bar {
+  height: 100%;
+  width: 100%;
+  background: var(--deep-forest);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.opening__count {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--espresso);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ───────── Navigation ───────── */
+
+.aarna-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 24px var(--gutter);
+  transition: all 0.45s var(--ease);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-16px);
+}
+
+.aarna-nav.is-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aarna-nav.is-scrolled {
+  padding: 14px var(--gutter);
+  background: rgba(244, 240, 232, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+
+.aarna-nav__inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+.aarna-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.aarna-nav__crest {
+  width: 22px;
+  height: 22px;
+  color: var(--deep-forest);
+}
+
+.aarna-nav__crest svg {

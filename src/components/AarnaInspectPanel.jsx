@@ -98,3 +98,104 @@ export default function AarnaInspectPanel() {
             onClick={() => st().close()}
             aria-label="Return to gallery"
           >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      {/* Main Scrollable Content */}
+      <div className="inspect-aarna__scroll" data-lenis-prevent>
+        <div className="inspect-aarna__head" data-stagger-aarna>
+          <span className="inspect-aarna__category">{item.category}</span>
+          <h2 className="inspect-aarna__name">{item.name}</h2>
+          <p className="inspect-aarna__price">
+            {currency === 'USD' ? formatPrice(item.price) : formatInr(item.price)}
+          </p>
+        </div>
+
+        <p className="inspect-aarna__desc" data-stagger-aarna>
+          {item.description}
+        </p>
+
+        {/* Color Palette Selection */}
+        <div className="inspect-aarna__group" data-stagger-aarna>
+          <div className="inspect-label">
+            <span>Colorway</span>
+            <span className="inspect-label__active">{item.colors[colorIndex].name}</span>
+          </div>
+          <div className="swatches-aarna">
+            {item.colors.map((c, i) => (
+              <button
+                key={c.name}
+                className={`swatch-aarna ${i === colorIndex ? 'is-active' : ''}`}
+                style={{ '--swatch-color': c.hex }}
+                onClick={() => st().setColor(item.id, i)}
+                aria-label={`Select ${c.name} colourway`}
+                aria-pressed={i === colorIndex}
+              >
+                <span className="swatch-aarna__inner" />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Size Selection */}
+        <div className="inspect-aarna__group" data-stagger-aarna>
+          <div className="inspect-label">
+            <span>Measurement & Fit</span>
+            <button
+              className="inspect-label__guide"
+              onClick={() => toggleEnquiry(true)}
+            >
+              Custom Bespoke Guide
+            </button>
+          </div>
+          <div className="sizes-aarna">
+            {item.sizes.map((s) => (
+              <button
+                key={s}
+                className={`size-aarna ${s === size ? 'is-active' : ''}`}
+                onClick={() => st().setSize(item.id, s)}
+                aria-pressed={s === size}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Action Button: Add to Bag */}
+        <div className="inspect-aarna__actions" data-stagger-aarna>
+          <button
+            className="btn btn--solid btn--wide"
+            onClick={() => addToBag(item)}
+          >
+            Add to Atelier Bag · {currency === 'USD' ? formatPrice(item.price) : formatInr(item.price)}
+          </button>
+          <button
+            className="btn btn--ghost btn--wide"
+            onClick={() => toggleEnquiry(true)}
+          >
+            Request Private Atelier Fitting
+          </button>
+        </div>
+
+        {/* Craftsmanship Specifications */}
+        <dl className="specs-aarna" data-stagger-aarna>
+          <h4 className="specs-aarna__title">Atelier Heritage & Construction</h4>
+          {Object.entries(item.specs).map(([k, v]) => (
+            <div key={k} className="spec-row">
+              <dt className="spec-row__key">{k}</dt>
+              <dd className="spec-row__val">{v}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <p className="inspect-aarna__hint" data-stagger-aarna>
+          Drag the 3D silhouette to orbit · Press Esc to return to gallery
+        </p>
+      </div>
+    </aside>
+  )
+}
+

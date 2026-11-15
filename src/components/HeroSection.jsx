@@ -54,3 +54,59 @@ export default function HeroSection() {
       {/* Top Editorial Metadata */}
       <div className="hero-aarna__meta" data-hero-fade>
         <span className="hero-aarna__edition">Atelier Edition · AW 2027</span>
+        <span className="hero-aarna__count">
+          {String(garments.length).padStart(2, '0')} Architectural Silhouettes · Real-time 3D
+        </span>
+      </div>
+
+      {/* Main Editorial Headline */}
+      <div className="hero-aarna__editorial">
+        <h1 className="hero-aarna__title">
+          <span className="hero-line">
+            <span>CRAFTED TO</span>
+          </span>
+          <span className="hero-line">
+            <span><em>BE REMEMBERED.</em></span>
+          </span>
+        </h1>
+
+        <p className="hero-aarna__subtext" data-hero-fade>
+          Contemporary silhouettes. Timeless Indian craftsmanship.
+        </p>
+
+        <p className="hero-aarna__lede" data-hero-fade>
+          Step inside the spatial gallery. Glide across hand-draped Varanasi silks,
+          sculptural 24-kali flared lehengas, and architectural tailoring in real-time light.
+        </p>
+
+        {/* Action CTAs */}
+        <div className="hero-aarna__cta" data-hero-fade>
+          <button className="btn btn--solid" onClick={pullPiece}>
+            Inspect Silhouette
+          </button>
+          <button
+            className="btn btn--ghost"
+            onClick={() => scrollToId('collection')}
+          >
+            Explore the Collection <span aria-hidden="true">↓</span>
+          </button>
+          <button
+            className="btn btn--text"
+            onClick={() => scrollToId('atelier')}
+          >
+            Discover Our Atelier →
+          </button>
+        </div>
+      </div>
+
+      {/* Bottom Hint */}
+      <div className="hero-aarna__foot" data-hero-fade>
+        <div className="hero-aarna__scroll-pill" onClick={() => scrollToId('collection')}>
+          <span className="hero-aarna__mouse" />
+          <span>Slide gallery or scroll to wander</span>
+        </div>
+      </div>
+    </section>
+  )
+}
+

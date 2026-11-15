@@ -66,3 +66,72 @@ export const useCloset = create((set, get) => ({
 
   setColor: (id, index) => set((s) => ({ colors: { ...s.colors, [id]: index } })),
   setSize: (id, size) => set((s) => ({ sizes: { ...s.sizes, [id]: size } })),
+
+  // Bag interactions
+  toggleBag: (open) => set((s) => ({ isBagOpen: open ?? !s.isBagOpen })),
+  toggleEnquiry: (open) => set((s) => ({ isEnquiryOpen: open ?? !s.isEnquiryOpen })),
+
+  addToBag: (item) => {
+    const { colors, sizes, bag } = get()
+    const colorIdx = colors[item.id] ?? 0
+    const colorObj = item.colors[colorIdx]
+    const size = sizes[item.id] ?? item.sizes[0]
+    const cartItemId = `${item.id}-${colorObj.name}-${size}`
+
+    const existingIdx = bag.findIndex((b) => b.cartItemId === cartItemId)
+    let nextBag
+    if (existingIdx > -1) {
+      nextBag = bag.map((b, i) => (i === existingIdx ? { ...b, quantity: b.quantity + 1 } : b))
+    } else {
+      nextBag = [
+        ...bag,
+        {
+          cartItemId,
+          id: item.id,
+          name: item.name,
+          category: item.category,
+          price: item.price,
+          color: colorObj.name,
+          colorHex: colorObj.hex,
+          size,
+          quantity: 1,
+        },
+      ]
+    }
+    saveBag(nextBag)
+    set({
+      bag: nextBag,
+      isBagOpen: true,
+      toast: { key: Date.now(), text: `${item.name} (${colorObj.name}) added to Atelier Bag.` },
+    })
+  },
+
+  updateQuantity: (cartItemId, delta) => {
+    const { bag } = get()
+    const nextBag = bag
+      .map((item) => {
+        if (item.cartItemId === cartItemId) {
+          const newQty = item.quantity + delta
+          return newQty > 0 ? { ...item, quantity: newQty } : null
+        }
+        return item
+      })
+      .filter(Boolean)
+    saveBag(nextBag)
+    set({ bag: nextBag })
+  },
+
+  removeFromBag: (cartItemId) => {
+    const { bag } = get()
+    const nextBag = bag.filter((item) => item.cartItemId !== cartItemId)
+    saveBag(nextBag)
+    set({ bag: nextBag })
+  },
+
+  clearBag: () => {
+    saveBag([])
+    set({ bag: [] })
+  },
+
+  clearToast: () => set({ toast: null }),
+}))

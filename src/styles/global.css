@@ -1619,3 +1619,104 @@ main#scroll-root.is-inspecting {
 }
 
 .aarna-footer__input:focus {
+  outline: none;
+  border-color: var(--sandstone);
+}
+
+.aarna-footer__submit {
+  height: 46px;
+  padding: 0 24px;
+  background: var(--sandstone);
+  color: var(--espresso);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.aarna-footer__submit:hover {
+  background: var(--warm-ivory);
+}
+
+.aarna-footer__subscribed {
+  color: var(--sandstone);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.aarna-footer__middle {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  padding: 60px 0;
+  border-bottom: 1px solid rgba(244, 240, 232, 0.12);
+}
+
+.aarna-footer__col-title {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sandstone);
+  margin-bottom: 20px;
+}
+
+.aarna-footer__address {
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(244, 240, 232, 0.7);
+  margin-bottom: 16px;
+}
+
+.aarna-footer__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aarna-footer__links button,
+.aarna-footer__links a {
+  font-size: 13px;
+  color: rgba(244, 240, 232, 0.75);
+  text-decoration: none;
+  text-align: left;
+  transition: color 0.3s;
+}
+
+.aarna-footer__links button:hover,
+.aarna-footer__links a:hover {
+  color: var(--sandstone);
+}
+
+.aarna-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(244, 240, 232, 0.45);
+  padding-top: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ───────── 3D HUD (Bottom Navigation) ───────── */
+
+.aarna-hud {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(24px);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  background: rgba(244, 240, 232, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);

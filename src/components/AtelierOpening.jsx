@@ -89,3 +89,94 @@ export default function AtelierOpening() {
 
         const el = root.current
         const hide = () => {
+          if (el) el.style.display = 'none'
+        }
+
+        // Grand exit: numbers hit 100, typography rises smoothly, screen parts like a lens aperture
+        const exitTl = gsap.timeline({
+          onComplete: hide,
+        })
+
+        exitTl
+          .to(shown, { v: 100, duration: 0.4, ease: 'power2.inOut', onUpdate: render })
+          .to([titleRef.current, subtitleRef.current, '.opening__meta'], {
+            y: -24,
+            autoAlpha: 0,
+            duration: 0.7,
+            stagger: 0.06,
+            ease: 'expo.in',
+          })
+          .to(lineRef.current, {
+            scaleY: 0,
+            duration: 0.3,
+            ease: 'power2.in',
+          }, '-=0.4')
+          .to(el, {
+            clipPath: 'inset(0% 0% 100% 0%)',
+            duration: 1.3,
+            ease: 'power4.inOut',
+          }, '-=0.15')
+
+        // Trigger 3D camera fly-down and Hero typography reveal
+        setTimeout(() => useCloset.getState().setReady(), 800)
+      }
+
+      const started = performance.now()
+      const scenePromise = new Promise((resolve) => {
+        if (useCloset.getState().sceneReady) return resolve()
+        const unsubReady = useCloset.subscribe((s) => {
+          if (s.sceneReady) {
+            unsubReady()
+            resolve()
+          }
+        })
+      })
+
+      // Wait for minimum aesthetic display time
+      scenePromise.then(() => {
+        const elapsed = performance.now() - started
+        const delay = Math.max(0, MIN_TITLE_DISPLAY - elapsed)
+        setTimeout(concludeSequence, delay)
+      })
+
+      // Safety timeout so user is never stuck
+      const safetyTimer = setTimeout(concludeSequence, MAX_FALLBACK_WAIT)
+
+      return () => {
+        clearTimeout(safetyTimer)
+        unsub()
+      }
+    },
+    { scope: root },
+  )
+
+  return (
+    <aside className="opening" ref={root} aria-label="AARNA Atelier Awakening">
+      {/* Thin architectural line drawn across the center */}
+      <div className="opening__line" ref={lineRef} />
+
+      <div className="opening__content">
+        <p className="opening__tagline" ref={subtitleRef}>
+          Contemporary Indian Atelier · Edition 2027
+        </p>
+
+        <h1 className="opening__brand" ref={titleRef}>
+          <span className="opening__letter">A</span>
+          <span className="opening__letter">A</span>
+          <span className="opening__letter">R</span>
+          <span className="opening__letter">N</span>
+          <span className="opening__letter">A</span>
+        </h1>
+
+        <div className="opening__meta">
+          <span className="opening__label">The Atelier Awakens</span>
+          <div className="opening__track">
+            <div className="opening__bar" ref={progressLineRef} />
+          </div>
+          <span className="opening__count" ref={countRef}>00</span>
+        </div>
+      </div>
+    </aside>
+  )
+}
+

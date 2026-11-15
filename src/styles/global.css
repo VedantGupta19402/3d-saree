@@ -910,3 +910,104 @@ main#scroll-root.is-inspecting {
   display: grid;
   grid-template-columns: 1fr 1.35fr;
   gap: 40px;
+  margin-top: 48px;
+}
+
+.craft-aarna__tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.craft-card {
+  padding: 22px;
+  border: 1px solid rgba(244, 240, 232, 0.14);
+  border-radius: 2px;
+  text-align: left;
+  transition: all 0.35s var(--ease);
+  background: rgba(244, 240, 232, 0.02);
+}
+
+.craft-card:hover {
+  border-color: var(--sandstone);
+  background: rgba(244, 240, 232, 0.06);
+}
+
+.craft-card.is-active {
+  border-color: var(--sandstone);
+  background: rgba(244, 240, 232, 0.1);
+  transform: translateX(8px);
+}
+
+.craft-card__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.craft-card__num {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--sandstone);
+}
+
+.craft-card__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.craft-card__title {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--warm-ivory);
+  margin-bottom: 4px;
+}
+
+.craft-card__sub {
+  font-size: 12px;
+  color: rgba(244, 240, 232, 0.65);
+}
+
+.craft-aarna__feature {
+  background: rgba(244, 240, 232, 0.05);
+  border: 1px solid rgba(244, 240, 232, 0.16);
+  padding: 36px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.craft-feature__badge {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(244, 240, 232, 0.12);
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+}
+
+.craft-feature__n {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--sandstone);
+}
+
+.craft-feature__sub {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244, 240, 232, 0.6);
+}
+
+.craft-feature__title {
+  font-family: var(--serif);
+  font-size: clamp(26px, 3.2vw, 42px);
+  color: var(--warm-ivory);
+  margin-bottom: 16px;
+}
+
+.craft-feature__desc {
+  font-size: 15px;
+  line-height: 1.7;

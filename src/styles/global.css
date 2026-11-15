@@ -2328,3 +2328,105 @@ main#scroll-root.is-inspecting {
 }
 
 .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--espresso);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--deep-forest);
+}
+
+.enquiry-form__footer {
+  margin-top: 24px;
+}
+
+.enquiry-form__privacy {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.enquiry-modal__success {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.enquiry-success__icon {
+  font-size: 32px;
+  color: var(--gold-accent);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.enquiry-success__title {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--espresso);
+  margin-bottom: 12px;
+}
+
+.enquiry-success__body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+/* ───────── Toast & Custom Cursor ───────── */
+
+.toast {
+  position: fixed;
+  bottom: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--deep-forest);
+  color: var(--warm-ivory);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  box-shadow: 0 12px 32px rgba(25, 60, 50, 0.25);
+  pointer-events: none;
+}
+
+.toast__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold-accent);
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;

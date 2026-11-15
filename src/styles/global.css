@@ -1416,3 +1416,105 @@ main#scroll-root.is-inspecting {
   margin-top: 36px;
   min-height: 420px;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.look-frame__header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sandstone);
+  border-bottom: 1px solid rgba(244, 240, 232, 0.15);
+  padding-bottom: 14px;
+}
+
+.look-frame__roman {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sandstone);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.look-frame__title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 64px);
+  color: var(--warm-ivory);
+  margin-bottom: 16px;
+}
+
+.look-frame__caption {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(244, 240, 232, 0.8);
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+
+.look-frame__tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.look-tag {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  background: rgba(244, 240, 232, 0.1);
+  border-radius: 2px;
+  color: var(--sandstone);
+}
+
+.lookbook-aarna__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  gap: 20px;
+}
+
+.lookbook-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lookbook-pill {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.lookbook-pill:hover,
+.lookbook-pill.is-active {
+  background: var(--espresso);
+  color: var(--warm-ivory);
+  border-color: var(--espresso);
+}
+
+.lookbook-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.lookbook-arrow {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  color: var(--espresso);

@@ -86,3 +86,91 @@ export default function AarnaEnquiryModal() {
                   className="form-input"
                   placeholder="e.g. Maharani Gayatri / Ananya Sharma"
                   value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label className="form-label" htmlFor="client-email">Email Address *</label>
+                  <input
+                    id="client-email"
+                    type="email"
+                    required
+                    className="form-input"
+                    placeholder="client@luxury.com"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="client-phone">Phone / WhatsApp *</label>
+                  <input
+                    id="client-phone"
+                    type="tel"
+                    required
+                    className="form-input"
+                    placeholder="+91 98765 43210"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label className="form-label" htmlFor="salon-choice">Preferred Atelier Salon</label>
+                  <select
+                    id="salon-choice"
+                    className="form-select"
+                    value={form.salon}
+                    onChange={(e) => setForm({ ...form, salon: e.target.value })}
+                  >
+                    <option value="New Delhi — The Dhan Mill">New Delhi — The Dhan Mill Salon</option>
+                    <option value="Mumbai — Kala Ghoda">Mumbai — Kala Ghoda Private Studio</option>
+                    <option value="London — Mayfair">London — Mayfair Private Suite</option>
+                    <option value="Virtual Concierge Consultation">Virtual Video Concierge</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="pref-date">Preferred Date</label>
+                  <input
+                    id="pref-date"
+                    type="date"
+                    className="form-input"
+                    value={form.date}
+                    onChange={(e) => setForm({ ...form, date: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label" htmlFor="client-notes">Special Requests / Measurement Details</label>
+                <textarea
+                  id="client-notes"
+                  rows={3}
+                  className="form-textarea"
+                  placeholder="Specify custom silhouette preferences, event dates, or bridal requirements..."
+                  value={form.notes}
+                  onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                />
+              </div>
+            </div>
+
+            <div className="enquiry-form__footer">
+              <button type="submit" className="btn btn--solid btn--wide">
+                Submit Private Request
+              </button>
+              <p className="enquiry-form__privacy">
+                Your private details remain strictly confidential under our Atelier Privacy Protocol.
+              </p>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+

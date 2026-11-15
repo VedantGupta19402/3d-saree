@@ -84,3 +84,90 @@ export default function AarnaGarment({ item, index }) {
     s.angVel += (restoring + ambientBreeze) * clampedDt
     s.angVel *= Math.exp(-clampedDt * 2.8)
     s.angle += s.angVel * clampedDt
+
+    // Natural secondary cloth twist
+    s.twist = damp(s.twist, THREE.MathUtils.clamp(rail.velocity * 0.12, -0.22, 0.22), 6, clampedDt)
+
+    // Idle and interactive rotation in inspection mode
+    const inspectT = s.t.v
+    if (isSelected) {
+      if (!rail.dragging) {
+        // Subtle organic breathing drift when idle
+        rail.rot.target += clampedDt * 0.25
+      }
+      rail.rot.current = damp(rail.rot.current, rail.rot.target, 8, clampedDt)
+      s.rotY = rail.rot.current
+    } else {
+      s.rotY = damp(s.rotY, 0, 5, clampedDt)
+    }
+
+    // Blend from gallery suspension position to inspection focal position
+    const currentX = lerp(railX, 0, inspectT)
+    const currentY = lerp(GALLERY_Y + s.hover * 0.04, GALLERY_Y - 0.05, inspectT)
+    const currentZ = lerp(s.hover * 0.12, FOCUS_Z, inspectT)
+
+    grp.position.set(currentX, currentY, currentZ)
+
+    // Realistic cloth sway and subtle air currents in the gallery space
+    const time = state.clock.elapsedTime
+    const airCurrent = Math.sin(time * 1.25 + s.phase) * 0.018
+    const flutter = Math.cos(time * 1.9 + s.phase * 1.3) * 0.009
+
+    grp.rotation.x = (s.angle + airCurrent) * (1 - inspectT * 0.95)
+    grp.rotation.y = (s.twist + flutter) * (1 - inspectT) + s.rotY * inspectT
+    grp.rotation.z = Math.sin(time * 0.92 + s.phase) * 0.015 * (1 - inspectT)
+  })
+
+  const onClick = (e) => {
+    e.stopPropagation()
+    // Ignore click if user was dragging the gallery track
+    if (Math.abs(rail.dragDist) > 8) return
+    const st = useCloset.getState()
+    if (st.selected === index) {
+      st.close()
+    } else {
+      st.select(index)
+    }
+  }
+
+  const { w, h, d } = built.bounds
+
+  return (
+    <group ref={group}>
+      {/* Handcrafted Teak & Brass Exhibition Hanger */}
+      <group position={[0, -0.015, 0]}>
+        {/* Brass suspension hook */}
+        <mesh position={[0, 0.055, 0]}>
+          <torusGeometry args={[0.045, 0.005, 12, 24, Math.PI * 1.3]} />
+          <primitive object={hardwareMaterial} attach="material" />
+        </mesh>
+        {/* Sculptural wooden hanger contoured bar */}
+        <mesh position={[0, 0, 0]} castShadow>
+          <boxGeometry args={[0.44, 0.024, 0.038]} />
+          <meshStandardMaterial color="#302720" roughness={0.65} />
+        </mesh>
+      </group>
+
+      {/* 3D Parametric Garment Mesh */}
+      <mesh geometry={built.geometry} material={material} castShadow receiveShadow />
+
+      {/* Invisible bounding box for precision touch/click hit-testing */}
+      <mesh
+        material={proxyMaterial}
+        position={[0, -h / 2, 0]}
+        scale={[w * 1.25, h * 1.1, Math.max(d * 1.8, 0.35)]}
+        onClick={onClick}
+        onPointerOver={(e) => {
+          e.stopPropagation()
+          useCloset.getState().setHovered(index)
+        }}
+        onPointerOut={() => {
+          useCloset.getState().setHovered(null)
+        }}
+      >
+        <boxGeometry />
+      </mesh>
+    </group>
+  )
+}
+

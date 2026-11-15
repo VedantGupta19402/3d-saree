@@ -3,6 +3,22 @@ import { garments } from '../data/garments'
 
 const count = garments.length
 
+// Load saved bag from localStorage safely
+const loadSavedBag = () => {
+  try {
+    const raw = localStorage.getItem('aarna_atelier_bag')
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+const saveBag = (bag) => {
+  try {
+    localStorage.setItem('aarna_atelier_bag', JSON.stringify(bag))
+  } catch {}
+}
+
 export const useCloset = create((set, get) => ({
   sceneReady: false,
   sceneError: null,
@@ -13,27 +29,32 @@ export const useCloset = create((set, get) => ({
   selected: null,
   colors: {},
   sizes: {},
-  bag: [],
+  bag: loadSavedBag(),
+  isBagOpen: false,
+  isEnquiryOpen: false,
+  activeCategory: 'All Creations',
   toast: null,
   section: 'hero',
+  currency: 'USD', // 'USD' | 'INR'
 
   setSceneReady: () => {
     if (get().sceneReady) return
-    performance.mark('shinchan:scene-ready')
+    performance.mark('aarna:scene-ready')
     set({ sceneReady: true, progress: 1 })
   },
-  // A failed 3D scene still lets the site load, just without the canvas.
-  setSceneError: (error) => !get().sceneError && set({ sceneError: error ?? new Error('3D scene unavailable'), sceneReady: true, progress: 1 }),
-  // Loading progress only ever moves forward.
+  setSceneError: (error) =>
+    !get().sceneError && set({ sceneError: error ?? new Error('3D gallery unavailable'), sceneReady: true, progress: 1 }),
   setProgress: (p) => p > get().progress && set({ progress: Math.min(p, 1) }),
   setReady: () => {
     if (get().ready) return
-    performance.mark('shinchan:ready')
+    performance.mark('aarna:ready')
     set({ ready: true })
   },
   setActive: (i) => get().active !== i && set({ active: i }),
   setHovered: (i) => get().hovered !== i && set({ hovered: i }),
   setSection: (section) => get().section !== section && set({ section }),
+  setActiveCategory: (category) => set({ activeCategory: category }),
+  toggleCurrency: () => set((s) => ({ currency: s.currency === 'USD' ? 'INR' : 'USD' })),
 
   select: (i) => set({ selected: i, hovered: null }),
   close: () => set({ selected: null }),
@@ -45,15 +66,3 @@ export const useCloset = create((set, get) => ({
 
   setColor: (id, index) => set((s) => ({ colors: { ...s.colors, [id]: index } })),
   setSize: (id, size) => set((s) => ({ sizes: { ...s.sizes, [id]: size } })),
-
-  addToBag: (item) => {
-    const { colors, sizes } = get()
-    const color = item.colors[colors[item.id] ?? 0].name
-    const size = sizes[item.id] ?? item.sizes[Math.floor(item.sizes.length / 2)]
-    set((s) => ({
-      bag: [...s.bag, { id: item.id, name: item.name, price: item.price, color, size }],
-      toast: { key: Date.now(), text: `${item.name} · ${color} · ${size} added to bag` },
-    }))
-  },
-  clearToast: () => set({ toast: null }),
-}))

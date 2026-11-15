@@ -76,3 +76,82 @@ export default function LookbookSection() {
             <span className="eyebrow">07 — Lookbook</span>
             <span className="lookbook-aarna__meta-tag">Autumn / Winter Visual Diary</span>
           </div>
+          <h2 className="display">
+            Light, silhouette, <em>and cinematic stillness.</em>
+          </h2>
+        </div>
+
+        {/* Lookbook Stage */}
+        <div className="lookbook-aarna__stage" data-reveal>
+          {/* Main Visual Display Card */}
+          <div className="look-frame">
+            <div className="look-frame__header">
+              <span className="look-frame__badge">{look.number}</span>
+              <span className="look-frame__loc">{look.location}</span>
+            </div>
+
+            <div className="look-frame__content">
+              <div className="look-frame__monolith">
+                <span className="look-frame__roman">AARNA · EDITORIAL</span>
+                <h3 className="look-frame__title">{look.title}</h3>
+                <p className="look-frame__caption">{look.caption}</p>
+                <div className="look-frame__tags">
+                  {look.tags.map((t) => (
+                    <span key={t} className="look-tag">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="look-frame__action">
+                <button
+                  className="btn btn--solid"
+                  onClick={() => handleInspect(look.garmentId)}
+                >
+                  View 3D Silhouette
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Look Selector Pagination Controls */}
+          <div className="lookbook-aarna__nav">
+            <div className="lookbook-pills">
+              {LOOKS.map((item, idx) => (
+                <button
+                  key={item.id}
+                  className={`lookbook-pill ${activeLook === idx ? 'is-active' : ''}`}
+                  onClick={() => setActiveLook(idx)}
+                >
+                  <span className="lookbook-pill__num">0{idx + 1}</span>
+                  <span className="lookbook-pill__label">{item.title}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="lookbook-arrows">
+              <button
+                className="lookbook-arrow"
+                onClick={() =>
+                  setActiveLook((prev) => (prev - 1 + LOOKS.length) % LOOKS.length)
+                }
+                aria-label="Previous look"
+              >
+                ←
+              </button>
+              <button
+                className="lookbook-arrow"
+                onClick={() => setActiveLook((prev) => (prev + 1) % LOOKS.length)}
+                aria-label="Next look"
+              >
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+

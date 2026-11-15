@@ -52,3 +52,58 @@ Replaces traditional loading screens with a fashion-film title sequence:
   * Heavy Satin Silk Crepe (liquid bias-cut draping).
   * Aged Hand-beaten Brass Hardware (`#C5A059`).
 * **Interactive Inspection**: Selecting any garment triggers a smooth camera focus transition, allowing 360° mouse and touch orbit rotation, colorway switching, bespoke sizing, and direct addition to the persistent Atelier Bag.
+
+---
+
+## 04. Website Architecture
+
+* **01 — Cinematic Hero**: Oversized editorial typography, 3D gallery glide, and interactive CTAs.
+* **02 — The Collection**: 3D spatial collection browser with category filtration tabs (Sarees, Lehengas, Anarkalis, Co-ords, Dresses, Ethnic Wear).
+* **03 — Craft & Texture**: Interactive material storytelling (Kadwa weaving, Gossamer Chanderi, Marodi burnishing, botanical dyeing).
+* **04 — Signature Pieces**: Editorial split compositions featuring statement silhouettes with full specifications.
+* **05 — The AARNA Woman**: Campaign manifesto and architectural stance.
+* **06 — Our Atelier**: Slow fashion philosophy, artisan guild ethics (Varanasi, Jaipur, Chanderi), and bespoke fitting process.
+* **07 — Lookbook**: Editorial visual diary with location tags and 3D preview links.
+* **08 — Final Experience**: Bespoke consultation CTA and return to spatial gallery.
+* **09 — Atelier Footer**: Boutique addresses (New Delhi, Mumbai, London), newsletter dispatch, and copyright.
+* **Interactive Services**:
+  * Floating Glassmorphic Navigation with currency switch (USD / INR).
+  * Persistent Atelier Bag Drawer (`localStorage`).
+  * Private Atelier Consultation & Bridal Commission Booking Modal.
+
+---
+
+## 05. Getting Started
+
+### Installation
+```bash
+npm install
+```
+
+### Development Server
+```bash
+npm run dev
+```
+
+### Production Build
+```bash
+npm run build
+```
+
+---
+
+## 06. Technical Specifications & Architecture
+
+* **Framework**: React 19 + Vite
+* **3D Engine**: Three.js + React Three Fiber + Drei
+* **Animation & Choreography**: GSAP + @gsap/react + Lenis Smooth Scroll
+* **State Management**: Zustand with `localStorage` persistence
+* **Typography**: Cormorant Garamond & Plus Jakarta Sans via Google Fonts
+
+---
+
+## 07. Author & Atelier Rights
+
+**AARNA Atelier**  
+Designed & Developed by Vedant Gupta  
+All Rights Reserved © 2027 AARNA ATELIER.

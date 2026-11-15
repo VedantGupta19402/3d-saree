@@ -1923,3 +1923,104 @@ main#scroll-root.is-inspecting {
 .inspect-label {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.inspect-label__active {
+  color: var(--espresso);
+  font-weight: 600;
+}
+
+.inspect-label__guide {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--deep-forest);
+  border-bottom: 1px solid var(--deep-forest);
+}
+
+.swatches-aarna {
+  display: flex;
+  gap: 12px;
+}
+
+.swatch-aarna {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s;
+}
+
+.swatch-aarna__inner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--swatch-color);
+  display: block;
+}
+
+.swatch-aarna.is-active {
+  border-color: var(--deep-forest);
+  transform: scale(1.15);
+}
+
+.sizes-aarna {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.size-aarna {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.size-aarna:hover {
+  border-color: var(--espresso);
+  color: var(--espresso);
+}
+
+.size-aarna.is-active {
+  background: var(--deep-forest);
+  color: var(--warm-ivory);
+  border-color: var(--deep-forest);
+}
+
+.inspect-aarna__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0;
+}
+
+.specs-aarna {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+.specs-aarna__title {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--espresso);
+  margin-bottom: 14px;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(48, 39, 32, 0.08);
+  font-size: 13px;
+}

@@ -25,7 +25,7 @@ function ReadySignal() {
     let fallback = 0
     const done = () => !cancelled && useCloset.getState().setSceneReady()
     ;(async () => {
-      performance.mark('ferrova:compile-start')
+      performance.mark('shinchan:compile-start')
       try {
         // Compile up front so the reveal doesn't hitch on the first visible frame.
         await gl.compileAsync?.(scene, camera)
@@ -33,7 +33,7 @@ function ReadySignal() {
         // Compilation still happens lazily on first render.
       }
       if (cancelled) return
-      performance.mark('ferrova:compile-end')
+      performance.mark('shinchan:compile-end')
       useCloset.getState().setProgress(STAGES.compiled)
       raf = requestAnimationFrame(() => (raf = requestAnimationFrame(done)))
       fallback = setTimeout(done, 1200)
@@ -54,7 +54,7 @@ class SceneBoundary extends Component {
     return { failed: true }
   }
   componentDidCatch(error) {
-    console.error('[FERROVA] 3D scene failed to load:', error)
+    console.error('[SHINCHAN] 3D scene failed to load:', error)
     useCloset.getState().setSceneError(error)
   }
   render() {
@@ -77,7 +77,7 @@ function Scene() {
     prepareScene()
       .then(() => alive && setPrepared(true))
       .catch((error) => {
-        console.error('[FERROVA] Failed to prepare the scene:', error)
+        console.error('[SHINCHAN] Failed to prepare the scene:', error)
         useCloset.getState().setSceneError(error)
       })
     return () => {

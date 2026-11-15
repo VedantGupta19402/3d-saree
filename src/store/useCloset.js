@@ -19,7 +19,7 @@ export const useCloset = create((set, get) => ({
 
   setSceneReady: () => {
     if (get().sceneReady) return
-    performance.mark('ferrova:scene-ready')
+    performance.mark('shinchan:scene-ready')
     set({ sceneReady: true, progress: 1 })
   },
   // A failed 3D scene still lets the site load, just without the canvas.
@@ -28,7 +28,7 @@ export const useCloset = create((set, get) => ({
   setProgress: (p) => p > get().progress && set({ progress: Math.min(p, 1) }),
   setReady: () => {
     if (get().ready) return
-    performance.mark('ferrova:ready')
+    performance.mark('shinchan:ready')
     set({ ready: true })
   },
   setActive: (i) => get().active !== i && set({ active: i }),

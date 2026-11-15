@@ -19,7 +19,7 @@ let pending = null
 export function prepareScene() {
   if (pending) return pending
   pending = (async () => {
-    performance.mark('ferrova:prepare-start')
+    performance.mark('shinchan:prepare-start')
     const kinds = [...new Set([...garments.map((g) => g.fabric), 'plaster', 'stone'])]
     const jobs = [...kinds.map((k) => () => getWeaveTextures(k)), ...garments.map((g) => () => buildGarment(g))]
     const [from, to] = STAGES.scene
@@ -28,7 +28,7 @@ export function prepareScene() {
       useCloset.getState().setProgress(from + ((i + 1) / jobs.length) * (to - from))
       await yieldToBrowser()
     }
-    performance.mark('ferrova:prepare-end')
+    performance.mark('shinchan:prepare-end')
   })()
   return pending
 }

@@ -281,3 +281,97 @@ function buildLehenga() {
   const dupatta = createSweepingRibbon({ points: dupattaPoints, width: 0.28, twist: 0.6 })
   parts.push(dupatta)
 
+  const merged = mergeGeometries(parts, false)
+  merged.computeBoundingBox()
+  merged.computeBoundingSphere()
+  return merged
+}
+
+/**
+ * 3. Meera Fluted Anarkali:
+ * Elongated fluted bell gown with knife-pleated flare and tailored bodice.
+ */
+function buildAnarkali() {
+  const parts = []
+
+  // Fluted gown body
+  const body = createParametricCloth({
+    width: 0.58,
+    height: 1.25,
+    segmentsX: 52,
+    segmentsY: 52,
+    waistWidth: 0.34,
+    hemWidth: 0.85,
+    foldAmp: 0.05,
+    foldFreq: 22,
+    curveWrap: 0.16,
+  })
+  body.translate(0, -0.3, 0)
+  parts.push(body)
+
+  // Fitted empire bodice
+  const bodice = createCholiBodice({ yTop: -0.06, yBottom: -0.3, radiusTop: 0.21, radiusBottom: 0.18 })
+  parts.push(bodice)
+
+  // Fluted structured sleeves
+  const sleeveL = createParametricCloth({
+    width: 0.18,
+    height: 0.58,
+    segmentsX: 24,
+    segmentsY: 28,
+    waistWidth: 0.14,
+    hemWidth: 0.22,
+    foldAmp: 0.02,
+    foldFreq: 12,
+  })
+  sleeveL.rotateZ(Math.PI / 14)
+  sleeveL.translate(-0.25, -0.12, 0)
+  parts.push(sleeveL)
+
+  const sleeveR = createParametricCloth({
+    width: 0.18,
+    height: 0.58,
+    segmentsX: 24,
+    segmentsY: 28,
+    waistWidth: 0.14,
+    hemWidth: 0.22,
+    foldAmp: 0.02,
+    foldFreq: 12,
+  })
+  sleeveR.rotateZ(-Math.PI / 14)
+  sleeveR.translate(0.25, -0.12, 0)
+  parts.push(sleeveR)
+
+  const merged = mergeGeometries(parts, false)
+  merged.computeBoundingBox()
+  merged.computeBoundingSphere()
+  return merged
+}
+
+/**
+ * 4. Surya Tailored Co-ord Set:
+ * Structured bandhgala blazer paired with fluid draped trousers.
+ */
+function buildCoord() {
+  const parts = []
+
+  // Structured tailored blazer
+  const jacketFront = createParametricCloth({
+    width: 0.52,
+    height: 0.68,
+    segmentsX: 32,
+    segmentsY: 32,
+    waistWidth: 0.44,
+    hemWidth: 0.48,
+    foldAmp: 0.015,
+    foldFreq: 6,
+    curveWrap: 0.12,
+  })
+  jacketFront.translate(0, -0.1, 0.08)
+  parts.push(jacketFront)
+
+  // Structured shoulder sleeves
+  const jacketSleeveL = new THREE.CylinderGeometry(0.12, 0.09, 0.62, 24)
+  jacketSleeveL.rotateZ(Math.PI / 12)
+  jacketSleeveL.translate(-0.28, -0.32, 0.02)
+  parts.push(jacketSleeveL)

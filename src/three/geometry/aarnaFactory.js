@@ -470,3 +470,97 @@ function buildAngrakha() {
 
   // Overlapping front panel
   const frontL = createParametricCloth({
+    width: 0.44,
+    height: 0.95,
+    segmentsX: 32,
+    segmentsY: 36,
+    waistWidth: 0.34,
+    hemWidth: 0.48,
+    foldAmp: 0.03,
+    foldFreq: 12,
+    asymmetry: 0.2,
+  })
+  frontL.translate(0.04, -0.12, 0.05)
+  parts.push(frontL)
+
+  // Under-panel
+  const frontR = createParametricCloth({
+    width: 0.44,
+    height: 0.95,
+    segmentsX: 32,
+    segmentsY: 36,
+    waistWidth: 0.34,
+    hemWidth: 0.48,
+    foldAmp: 0.025,
+    foldFreq: 12,
+    asymmetry: -0.18,
+  })
+  frontR.translate(-0.06, -0.12, -0.02)
+  parts.push(frontR)
+
+  // Flared sleeves
+  const sleeveL = new THREE.CylinderGeometry(0.12, 0.18, 0.54, 24, 8, true)
+  sleeveL.rotateZ(Math.PI / 10)
+  sleeveL.translate(-0.26, -0.28, 0)
+  parts.push(sleeveL)
+
+  const sleeveR = new THREE.CylinderGeometry(0.12, 0.18, 0.54, 24, 8, true)
+  sleeveR.rotateZ(-Math.PI / 10)
+  sleeveR.translate(0.26, -0.28, 0)
+  parts.push(sleeveR)
+
+  // Tassel cords
+  const cordPoints = [
+    [0.18, -0.32, 0.08],
+    [0.24, -0.42, 0.1],
+    [0.22, -0.58, 0.09],
+  ]
+  const cord = createSweepingRibbon({ points: cordPoints, width: 0.02, twist: 0.1 })
+  parts.push(cord)
+
+  const merged = mergeGeometries(parts, false)
+  merged.computeBoundingBox()
+  merged.computeBoundingSphere()
+  return merged
+}
+
+// Caching geometry generator
+const cache = new Map()
+
+export function buildAarnaGarment(item) {
+  if (cache.has(item.id)) return cache.get(item.id)
+
+  let geom
+  switch (item.type) {
+    case 'saree':
+      geom = buildSaree()
+      break
+    case 'lehenga':
+      geom = buildLehenga()
+      break
+    case 'anarkali':
+      geom = buildAnarkali()
+      break
+    case 'coord':
+      geom = buildCoord()
+      break
+    case 'dress':
+      geom = buildGown()
+      break
+    case 'angrakha':
+    default:
+      geom = buildAngrakha()
+      break
+  }
+
+  const box = geom.boundingBox
+  const bounds = {
+    w: box.max.x - box.min.x,
+    h: box.max.y - box.min.y,
+    d: box.max.z - box.min.z,
+  }
+
+  const result = { geometry: geom, bounds }
+  cache.set(item.id, result)
+  return result
+}

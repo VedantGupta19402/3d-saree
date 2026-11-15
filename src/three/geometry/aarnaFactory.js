@@ -92,3 +92,98 @@ function createSweepingRibbon({
     const point = curve.getPointAt(t)
     const normal = frames.normals[i]
     const binormal = frames.binormals[i]
+
+    // Rotate ribbon along path
+    const angle = t * twist * Math.PI
+    const cos = Math.cos(angle)
+    const sin = Math.sin(angle)
+    const rDir = new THREE.Vector3()
+      .addScaledVector(normal, cos)
+      .addScaledVector(binormal, sin)
+      .normalize()
+
+    const halfW = (width / 2) * (1 - 0.15 * Math.sin(t * Math.PI))
+
+    const pLeft = point.clone().addScaledVector(rDir, -halfW)
+    const pRight = point.clone().addScaledVector(rDir, halfW)
+
+    positions.push(pLeft.x, pLeft.y, pLeft.z)
+    positions.push(pRight.x, pRight.y, pRight.z)
+
+    uvs.push(0, t)
+    uvs.push(1, t)
+  }
+
+  for (let i = 0; i < steps; i++) {
+    const a = i * 2
+    const b = i * 2 + 1
+    const c = (i + 1) * 2
+    const d = (i + 1) * 2 + 1
+
+    indices.push(a, c, b)
+    indices.push(b, c, d)
+    // Double-sided
+    indices.push(a, b, c)
+    indices.push(b, d, c)
+  }
+
+  geom.setIndex(indices)
+  geom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+  geom.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2))
+  geom.computeVertexNormals()
+
+  return geom
+}
+
+/**
+ * Creates architectural cylindrical bodice/choli.
+ */
+function createCholiBodice({ yTop = -0.06, yBottom = -0.34, radiusTop = 0.22, radiusBottom = 0.18 }) {
+  const geom = new THREE.CylinderGeometry(radiusTop, radiusBottom, Math.abs(yTop - yBottom), 36, 12, true)
+  geom.scale(1.08, 1, 0.75) // Torso oval proportion
+  geom.translate(0, (yTop + yBottom) / 2, 0)
+  return geom
+}
+
+/**
+ * 1. Contemporary Saree:
+ * Pre-pleated architectural front, fitted choli, cascading 3D pallu curving over the left shoulder.
+ */
+function buildSaree() {
+  const parts = []
+
+  // Front architectural pleats (knife pleats)
+  const pleats = createParametricCloth({
+    width: 0.52,
+    height: 1.15,
+    segmentsX: 48,
+    segmentsY: 48,
+    waistWidth: 0.36,
+    hemWidth: 0.68,
+    foldAmp: 0.045,
+    foldFreq: 18,
+    curveWrap: 0.14,
+  })
+  pleats.translate(0, -0.32, 0.05)
+  parts.push(pleats)
+
+  // Fitted architectural bustier
+  const choli = createCholiBodice({ yTop: -0.08, yBottom: -0.32, radiusTop: 0.21, radiusBottom: 0.17 })
+  parts.push(choli)
+
+  // Sculptural cascading Pallu: sweeps from right hip -> across torso -> over left shoulder -> cascades down behind
+  const palluPoints = [
+    [0.18, -0.35, 0.12],
+    [0.12, -0.25, 0.16],
+    [-0.04, -0.15, 0.15],
+    [-0.18, -0.06, 0.08],
+    [-0.22, -0.02, -0.04],
+    [-0.20, -0.12, -0.18],
+    [-0.18, -0.35, -0.22],
+    [-0.16, -0.65, -0.24],
+    [-0.15, -0.98, -0.25],
+    [-0.14, -1.25, -0.24],
+  ]
+  const pallu = createSweepingRibbon({ points: palluPoints, width: 0.32, twist: 0.85 })
+  parts.push(pallu)
+

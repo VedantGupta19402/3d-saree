@@ -187,3 +187,97 @@ function buildSaree() {
   const pallu = createSweepingRibbon({ points: palluPoints, width: 0.32, twist: 0.85 })
   parts.push(pallu)
 
+  // Border zari trim detail
+  const trim = new THREE.TorusGeometry(0.24, 0.008, 8, 36)
+  trim.rotateX(Math.PI / 2)
+  trim.scale(1.05, 0.76, 1)
+  trim.translate(0, -0.32, 0)
+  parts.push(trim)
+
+  const merged = mergeGeometries(parts, false)
+  merged.computeBoundingBox()
+  merged.computeBoundingSphere()
+  return merged
+}
+
+/**
+ * 2. Designer Lehenga:
+ * 24-Kali Flared Skirt with deep sweeping waves and floating sheer dupatta.
+ */
+function buildLehenga() {
+  const parts = []
+
+  // Grand architectural circular flared skirt
+  const skirtGeom = new THREE.BufferGeometry()
+  const positions = []
+  const uvs = []
+  const indices = []
+
+  const segmentsV = 44
+  const segmentsU = 64
+  const height = 1.18
+
+  for (let j = 0; j <= segmentsV; j++) {
+    const v = j / segmentsV
+    const y = -0.32 - v * height
+
+    const rBase = THREE.MathUtils.lerp(0.22, 0.72, Math.pow(v, 1.35))
+
+    for (let i = 0; i <= segmentsU; i++) {
+      const u = i / segmentsU
+      const theta = u * Math.PI * 2
+      const kaliWave = Math.sin(theta * 24) * (0.045 * Math.pow(v, 1.1))
+
+      const r = (rBase + kaliWave) * (1 + 0.04 * Math.cos(theta * 2))
+      const x = Math.cos(theta) * r
+      const z = Math.sin(theta) * (r * 0.88)
+
+      positions.push(x, y, z)
+      uvs.push(u, v)
+    }
+  }
+
+  const row = segmentsU + 1
+  for (let j = 0; j < segmentsV; j++) {
+    for (let i = 0; i < segmentsU; i++) {
+      const a = j * row + i
+      const b = j * row + (i + 1)
+      const c = (j + 1) * row + i
+      const d = (j + 1) * row + (i + 1)
+
+      indices.push(a, c, b)
+      indices.push(b, c, d)
+      indices.push(a, b, c)
+      indices.push(b, d, c)
+    }
+  }
+
+  skirtGeom.setIndex(indices)
+  skirtGeom.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+  skirtGeom.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2))
+  skirtGeom.computeVertexNormals()
+  parts.push(skirtGeom)
+
+  // Fitted architectural blouse
+  const choli = createCholiBodice({ yTop: -0.06, yBottom: -0.28, radiusTop: 0.22, radiusBottom: 0.17 })
+  parts.push(choli)
+
+  // Waistband yoke
+  const belt = new THREE.CylinderGeometry(0.23, 0.24, 0.05, 36)
+  belt.scale(1.04, 1, 0.82)
+  belt.translate(0, -0.31, 0)
+  parts.push(belt)
+
+  // Floating sheer dupatta drape
+  const dupattaPoints = [
+    [-0.32, -0.15, 0.12],
+    [-0.24, -0.04, 0.14],
+    [-0.05, 0.02, 0.12],
+    [0.18, -0.06, 0.06],
+    [0.26, -0.25, -0.04],
+    [0.32, -0.55, -0.12],
+    [0.34, -0.92, -0.16],
+  ]
+  const dupatta = createSweepingRibbon({ points: dupattaPoints, width: 0.28, twist: 0.6 })
+  parts.push(dupatta)
+

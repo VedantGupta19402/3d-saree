@@ -1011,3 +1011,105 @@ main#scroll-root.is-inspecting {
 .craft-feature__desc {
   font-size: 15px;
   line-height: 1.7;
+  color: rgba(244, 240, 232, 0.85);
+  margin-bottom: 32px;
+}
+
+.craft-feature__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px solid rgba(244, 240, 232, 0.12);
+  border-bottom: 1px solid rgba(244, 240, 232, 0.12);
+  margin-bottom: 28px;
+}
+
+.craft-stat__key {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sandstone);
+  margin-bottom: 4px;
+}
+
+.craft-stat__val {
+  font-size: 13px;
+  color: var(--warm-ivory);
+  font-weight: 500;
+  margin: 0;
+}
+
+.craft-feature__quote blockquote {
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--sandstone-light);
+}
+
+.craft-feature__quote cite {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 240, 232, 0.5);
+  font-style: normal;
+}
+
+/* ───────── 04. Signature Pieces Section ───────── */
+
+.signature-aarna__items {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin-top: 48px;
+}
+
+.sig-card {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 40px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: clamp(32px, 4vw, 56px);
+  border-radius: var(--radius);
+  align-items: center;
+}
+
+.sig-card--reversed {
+  grid-template-columns: 1.25fr 1fr;
+}
+
+.sig-card--reversed .sig-card__visual {
+  order: 2;
+}
+
+.sig-card--reversed .sig-card__content {
+  order: 1;
+}
+
+.sig-card__visual {
+  background: var(--warm-ivory);
+  border: 1px solid var(--line);
+  padding: 32px;
+  border-radius: 2px;
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sig-card__canvas-badge {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sig-card__live-indicator {
+  color: var(--deep-forest);
+  font-weight: 600;
+}

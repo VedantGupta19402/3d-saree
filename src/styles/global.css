@@ -99,3 +99,105 @@ button {
   gap: 10px;
   height: 48px;
   padding: 0 28px;
+  border-radius: 2px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.35s var(--ease);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.btn--solid {
+  background: var(--deep-forest);
+  color: var(--warm-ivory);
+  border: 1px solid var(--deep-forest);
+}
+
+.btn--solid:hover {
+  background: var(--espresso);
+  border-color: var(--espresso);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(25, 60, 50, 0.18);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--espresso);
+  border: 1px solid rgba(48, 39, 32, 0.3);
+}
+
+.btn--ghost:hover {
+  background: rgba(48, 39, 32, 0.05);
+  border-color: var(--espresso);
+  transform: translateY(-2px);
+}
+
+.btn--text {
+  background: transparent;
+  color: var(--deep-forest);
+  border: none;
+  padding: 0 4px;
+  border-bottom: 1px solid var(--deep-forest);
+  height: auto;
+  padding-bottom: 4px;
+  border-radius: 0;
+}
+
+.btn--text:hover {
+  color: var(--espresso);
+  border-color: var(--espresso);
+  letter-spacing: 0.2em;
+}
+
+.btn--wide {
+  width: 100%;
+}
+
+/* ───────── 3D Stage & Background ───────── */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: auto;
+  background: var(--warm-ivory);
+}
+
+.stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.stage__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--espresso);
+  background: var(--warm-ivory);
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(48, 39, 32, 0.08) 100%);
+}
+
+/* ───────── Scroll Architecture ───────── */
+
+main#scroll-root {
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease);
+}
+

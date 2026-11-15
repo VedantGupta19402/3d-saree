@@ -51,3 +51,56 @@ export default function CollectionSection() {
               onClick={() => setActiveCategory(cat)}
             >
               {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Interactive Silhouette Rows */}
+        <ol className="collection-aarna__list">
+          {filteredGarments.map((g) => {
+            const originalIndex = garments.findIndex((item) => item.id === g.id)
+            const c = g.colors[colors[g.id] ?? 0]
+            const isCurrent = active === originalIndex
+
+            return (
+              <li key={g.id} data-reveal>
+                <button
+                  className={`collection-aarna__row ${isCurrent ? 'is-active' : ''}`}
+                  onClick={() => handleSelect(originalIndex)}
+                  onMouseEnter={() => useCloset.getState().setHovered(originalIndex)}
+                  onMouseLeave={() => useCloset.getState().setHovered(null)}
+                >
+                  <span className="collection-aarna__n">0{originalIndex + 1}</span>
+
+                  <span
+                    className="collection-aarna__swatch"
+                    style={{ background: c.hex }}
+                    aria-hidden="true"
+                    title={`Current colorway: ${c.name}`}
+                  />
+
+                  <div className="collection-aarna__details">
+                    <span className="collection-aarna__name">{g.name}</span>
+                    <span className="collection-aarna__meta">
+                      {g.category} · {g.specs.Origin} · {g.specs.Hours}
+                    </span>
+                  </div>
+
+                  <span className="collection-aarna__price">
+                    {currency === 'USD' ? formatPrice(g.price) : formatInr(g.price)}
+                  </span>
+
+                  <span className="collection-aarna__cta-label">
+                    <span>Inspect 3D</span>
+                    <span className="collection-aarna__arrow" aria-hidden="true">→</span>
+                  </span>
+                </button>
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+    </section>
+  )
+}
+

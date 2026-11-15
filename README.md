@@ -1,4 +1,4 @@
-# FERROVA
+# SHINCHAN
 
 > An interactive 3D wardrobe for the web. Slide garments along a clothing rail, pull one forward, turn it in the light and make it yours.
 
@@ -34,7 +34,7 @@
 
 ## Overview
 
-**FERROVA** is a single-page, real-time 3D fashion experience built with React and Three.js. Instead of a flat product grid, the collection hangs on a steel rail inside a softly lit boutique: visitors drag the rail to browse, click a piece to bring it forward, rotate it, switch its colourway, choose a size and add it to a bag.
+**SHINCHAN** is a single-page, real-time 3D fashion experience built with React and Three.js. Instead of a flat product grid, the collection hangs on a steel rail inside a softly lit boutique: visitors drag the rail to browse, click a piece to bring it forward, rotate it, switch its colourway, choose a size and add it to a bag.
 
 The nine garments are not loaded from model files or images. Each one is **modelled procedurally in code** from flat pattern pieces, and every fabric (jersey, rib knit, oxford, twill, selvedge denim, fleece, wool, silk and lambskin) has its own generated texture and material.
 
@@ -325,7 +325,7 @@ Touch is supported natively: horizontal swipes move the rail while vertical swip
 
 ## Security
 
-FERROVA is a fully static, client-side application:
+SHINCHAN is a fully static, client-side application:
 
 - **No backend, accounts or payments.** The bag is a front-end demonstration held in memory; nothing is submitted or persisted.
 - **No personal data collected.** The site uses no cookies, analytics or forms.
@@ -345,8 +345,12 @@ FERROVA is a fully static, client-side application:
 
 ## Author
 
-**Dhia Saied**
+**Shinchan**
+
+## Credits
+
+Built on **FERROVA**, the original interactive 3D wardrobe by **Dhia Saied** — https://github.com/dhiasaied/FERROVA-. The original concept, design, interface and 3D modelling pipeline belong to the original author.
 
 ## License
 
-No license has been specified for this project yet. All rights are reserved by the author until a license is added. To open-source it, add a `LICENSE` file (for example MIT) and update this section.
+All rights reserved.

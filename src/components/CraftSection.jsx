@@ -61,3 +61,66 @@ export default function CraftSection() {
             slow, meditative handcraft across centuries-old Indian artisan clusters.
           </p>
         </div>
+
+        {/* Interactive Craft Grid */}
+        <div className="craft-aarna__grid">
+          {/* Left: Craft Navigation Cards */}
+          <div className="craft-aarna__tabs" data-reveal>
+            {CRAFT_STORIES.map((story, i) => (
+              <button
+                key={story.id}
+                className={`craft-card ${activeStory === i ? 'is-active' : ''}`}
+                onClick={() => setActiveStory(i)}
+              >
+                <div className="craft-card__top">
+                  <span className="craft-card__num">{story.num}</span>
+                  <span
+                    className="craft-card__dot"
+                    style={{ background: story.accent }}
+                    aria-hidden="true"
+                  />
+                </div>
+                <h3 className="craft-card__title">{story.title}</h3>
+                <p className="craft-card__sub">{story.subtitle}</p>
+              </button>
+            ))}
+          </div>
+
+          {/* Right: Rich Story Showcase */}
+          <div className="craft-aarna__feature" data-reveal>
+            <div className="craft-feature__badge">
+              <span className="craft-feature__n">
+                {CRAFT_STORIES[activeStory].num} / 04
+              </span>
+              <span className="craft-feature__sub">Atelier Material Study</span>
+            </div>
+
+            <h3 className="craft-feature__title">
+              {CRAFT_STORIES[activeStory].title}
+            </h3>
+            <p className="craft-feature__desc">
+              {CRAFT_STORIES[activeStory].desc}
+            </p>
+
+            <dl className="craft-feature__stats">
+              {Object.entries(CRAFT_STORIES[activeStory].stats).map(([k, v]) => (
+                <div key={k} className="craft-stat">
+                  <dt className="craft-stat__key">{k}</dt>
+                  <dd className="craft-stat__val">{v}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="craft-feature__quote">
+              <blockquote>
+                “When an artisan weaves at five picks a minute on a wooden loom, the cloth breathes with the weaver’s own pulse.”
+              </blockquote>
+              <cite>— Master Craftsman Ram Narayan, Varanasi</cite>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+

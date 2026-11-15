@@ -54,3 +54,60 @@ export default function AarnaFooter() {
             )}
           </div>
         </div>
+
+        {/* Middle Addresses & Navigation */}
+        <div className="aarna-footer__middle">
+          <div className="aarna-footer__col">
+            <h4 className="aarna-footer__col-title">Ateliers & Salons</h4>
+            <address className="aarna-footer__address">
+              <strong>New Delhi</strong><br />
+              The Dhan Mill, 100 Feet Road<br />
+              Chhatarpur, New Delhi 110074
+            </address>
+            <address className="aarna-footer__address">
+              <strong>Mumbai</strong><br />
+              Kala Ghoda Arts Precinct<br />
+              Fort, Mumbai 400001
+            </address>
+            <address className="aarna-footer__address">
+              <strong>London</strong><br />
+              Private Salon, Mayfair<br />
+              London W1K
+            </address>
+          </div>
+
+          <div className="aarna-footer__col">
+            <h4 className="aarna-footer__col-title">Exhibition Navigation</h4>
+            <ul className="aarna-footer__links">
+              <li><button onClick={() => scrollToId('hero')}>01 Spatial Gallery</button></li>
+              <li><button onClick={() => scrollToId('collection')}>02 The Collection</button></li>
+              <li><button onClick={() => scrollToId('craft')}>03 Craft & Textile Heritage</button></li>
+              <li><button onClick={() => scrollToId('signature')}>04 Signature Statements</button></li>
+              <li><button onClick={() => scrollToId('woman')}>05 The AARNA Woman</button></li>
+              <li><button onClick={() => scrollToId('atelier')}>06 Our Guild & Artisans</button></li>
+              <li><button onClick={() => scrollToId('lookbook')}>07 Autumn/Winter Lookbook</button></li>
+            </ul>
+          </div>
+
+          <div className="aarna-footer__col">
+            <h4 className="aarna-footer__col-title">Private Services</h4>
+            <ul className="aarna-footer__links">
+              <li><button onClick={() => toggleEnquiry(true)}>Bespoke Bridal Appointments</button></li>
+              <li><button onClick={() => toggleEnquiry(true)}>Master Measuring Service</button></li>
+              <li><button onClick={() => toggleEnquiry(true)}>Textile Conservation & Archiving</button></li>
+              <li><a href="mailto:concierge@aarna-atelier.com">concierge@aarna-atelier.com</a></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Baseline Bar */}
+        <div className="aarna-footer__bottom">
+          <span>© 2027 AARNA ATELIER. All rights reserved.</span>
+          <span>Three.js · WebGL Spatial Stage · GSAP Motion</span>
+          <span>Bespoke Handloom Guilds of India</span>
+        </div>
+      </div>
+    </footer>
+  )
+}
+

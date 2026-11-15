@@ -74,3 +74,79 @@ export function getAarnaTexture(kind) {
         const speckle = (Math.random() - 0.5) * 40
         const val = Math.min(255, Math.max(0, 190 + sediment + speckle))
         d[idx] = val
+        d[idx + 1] = val
+        d[idx + 2] = val
+        d[idx + 3] = 255
+      }
+    }
+  } else {
+    // Generic fine handloom weave
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const idx = (y * size + x) * 4
+        const weave = ((x % 3 === 0) ? 20 : 0) + ((y % 3 === 0) ? 20 : 0)
+        const val = 170 + weave + (Math.random() - 0.5) * 15
+        d[idx] = val
+        d[idx + 1] = val
+        d[idx + 2] = val
+        d[idx + 3] = 255
+      }
+    }
+  }
+
+  ctx.putImageData(imgData, 0, 0)
+
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.wrapS = THREE.RepeatWrapping
+  texture.wrapT = THREE.RepeatWrapping
+  texture.repeat.set(4, 4)
+  texture.needsUpdate = true
+
+  textureCache.set(kind, texture)
+  return texture
+}
+
+/**
+ * Creates an exquisite MeshPhysicalMaterial for Indian Atelier fabrics.
+ */
+export function createAarnaMaterial(item) {
+  const tex = getAarnaTexture(item.fabric || 'mulberry_silk')
+  const initialColor = new THREE.Color(item.colors[0].hex)
+  const sheenTint = initialColor.clone().lerp(new THREE.Color('#FFF8EE'), 0.5)
+
+  const isSheer = item.fabric === 'silk_organza' || item.fabric === 'chanderi'
+  const isLustrous = item.fabric === 'mulberry_silk' || item.fabric === 'satin_crepe'
+
+  const mat = new THREE.MeshPhysicalMaterial({
+    color: initialColor,
+    roughness: isLustrous ? 0.32 : (item.look.roughness ?? 0.45),
+    metalness: isLustrous ? 0.08 : 0.02,
+    bumpMap: tex,
+    bumpScale: (item.look.bump ?? 1.2) * 0.0035,
+    sheen: 1.0,
+    sheenColor: sheenTint,
+    sheenRoughness: isLustrous ? 0.22 : 0.45,
+    clearcoat: isLustrous ? 0.3 : (item.look.clearcoat ?? 0.1),
+    clearcoatRoughness: 0.2,
+    specularIntensity: 0.95,
+    specularColor: new THREE.Color('#FFF5E6'),
+    transmission: isSheer ? (item.fabric === 'silk_organza' ? 0.32 : 0.18) : 0,
+    thickness: isSheer ? 0.12 : 0,
+    ior: 1.44,
+    side: THREE.DoubleSide,
+  })
+
+  return mat
+}
+
+/**
+ * Creates antique beaten brass hardware material.
+ */
+export function createAarnaHardware() {
+  return new THREE.MeshStandardMaterial({
+    color: '#D4AF37', // Antique brushed gold / brass
+    metalness: 0.88,
+    roughness: 0.32,
+  })
+}
+

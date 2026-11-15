@@ -1113,3 +1113,104 @@ main#scroll-root.is-inspecting {
   color: var(--deep-forest);
   font-weight: 600;
 }
+
+.sig-card__arch-shape {
+  border: 1px solid var(--sandstone);
+  border-radius: 120px 120px 0 0;
+  padding: 48px 24px 32px;
+  text-align: center;
+  background: rgba(199, 184, 162, 0.12);
+  margin: 20px 0;
+}
+
+.sig-card__roman {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--muted-olive);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.sig-card__visual-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--espresso);
+  margin-bottom: 6px;
+}
+
+.sig-card__visual-category {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sig-card__palette {
+  display: flex;
+  gap: 8px;
+}
+
+.sig-card__chip {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+}
+
+.sig-card__eyebrow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-olive);
+  margin-bottom: 16px;
+}
+
+.sig-card__headline {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.1;
+  color: var(--espresso);
+  margin-bottom: 16px;
+}
+
+.sig-card__body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.sig-card__specs-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 28px;
+}
+
+.sig-spec {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.sig-spec__label {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+.sig-spec__val {
+  color: var(--espresso);
+  font-weight: 500;
+}
+
+.sig-spec__price {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--deep-forest);

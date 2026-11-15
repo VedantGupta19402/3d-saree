@@ -375,3 +375,98 @@ function buildCoord() {
   jacketSleeveL.rotateZ(Math.PI / 12)
   jacketSleeveL.translate(-0.28, -0.32, 0.02)
   parts.push(jacketSleeveL)
+
+  const jacketSleeveR = new THREE.CylinderGeometry(0.12, 0.09, 0.62, 24)
+  jacketSleeveR.rotateZ(-Math.PI / 12)
+  jacketSleeveR.translate(0.28, -0.32, 0.02)
+  parts.push(jacketSleeveR)
+
+  // Mandarin collar
+  const collar = new THREE.CylinderGeometry(0.13, 0.135, 0.05, 28, 1, true)
+  collar.translate(0, -0.065, 0)
+  parts.push(collar)
+
+  // Asymmetric fluid draped trousers
+  const trouserL = createParametricCloth({
+    width: 0.28,
+    height: 0.88,
+    segmentsX: 28,
+    segmentsY: 36,
+    waistWidth: 0.22,
+    hemWidth: 0.29,
+    foldAmp: 0.028,
+    foldFreq: 10,
+    asymmetry: 0.15,
+  })
+  trouserL.translate(-0.13, -0.72, 0)
+  parts.push(trouserL)
+
+  const trouserR = createParametricCloth({
+    width: 0.28,
+    height: 0.88,
+    segmentsX: 28,
+    segmentsY: 36,
+    waistWidth: 0.22,
+    hemWidth: 0.27,
+    foldAmp: 0.025,
+    foldFreq: 10,
+  })
+  trouserR.translate(0.13, -0.72, 0)
+  parts.push(trouserR)
+
+  const merged = mergeGeometries(parts, false)
+  merged.computeBoundingBox()
+  merged.computeBoundingSphere()
+  return merged
+}
+
+/**
+ * 5. Pallavi Asymmetric Cowl Gown:
+ * One-shoulder bias drape with sweeping diagonal folds and side drape.
+ */
+function buildGown() {
+  const parts = []
+
+  // Fluid bias-cut draped gown with diagonal tension
+  const gown = createParametricCloth({
+    width: 0.54,
+    height: 1.35,
+    segmentsX: 52,
+    segmentsY: 54,
+    waistWidth: 0.36,
+    hemWidth: 0.65,
+    foldAmp: 0.042,
+    foldFreq: 12,
+    curveWrap: 0.14,
+    asymmetry: -0.25,
+  })
+  gown.translate(0, -0.15, 0)
+  parts.push(gown)
+
+  // One-shoulder cowl drape sweeping diagonally across the chest
+  const cowlPoints = [
+    [-0.18, -0.05, 0.06],
+    [-0.08, -0.18, 0.14],
+    [0.08, -0.24, 0.15],
+    [0.22, -0.15, 0.12],
+    [0.24, -0.35, 0.08],
+    [0.22, -0.75, 0.04],
+  ]
+  const cowlDrape = createSweepingRibbon({ points: cowlPoints, width: 0.24, twist: 0.5 })
+  parts.push(cowlDrape)
+
+  const merged = mergeGeometries(parts, false)
+  merged.computeBoundingBox()
+  merged.computeBoundingSphere()
+  return merged
+}
+
+/**
+ * 6. Tara Crossover Angrakha Tunic:
+ * Overlapping asymmetrical crossover panels with flare and tassel ties.
+ */
+function buildAngrakha() {
+  const parts = []
+
+  // Overlapping front panel
+  const frontL = createParametricCloth({

@@ -707,3 +707,105 @@ main#scroll-root.is-inspecting {
   display: flex;
   align-items: center;
   gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(244, 240, 232, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  transition: all 0.3s;
+}
+
+.hero-aarna__scroll-pill:hover {
+  background: var(--warm-ivory);
+  border-color: var(--espresso);
+}
+
+.hero-aarna__mouse {
+  width: 14px;
+  height: 20px;
+  border: 1.5px solid var(--muted);
+  border-radius: 999px;
+  position: relative;
+}
+
+.hero-aarna__mouse::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 5px;
+  background: var(--muted-olive);
+  border-radius: 2px;
+}
+
+/* ───────── 02. Collection Section ───────── */
+
+.collection-aarna__panel {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: clamp(36px, 5vw, 72px);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 48px rgba(48, 39, 32, 0.04);
+}
+
+.collection-aarna__eyebrow-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.collection-aarna__tag {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.collection-aarna__filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 32px 0 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.collection-aarna__tab {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  transition: all 0.3s;
+}
+
+.collection-aarna__tab:hover {
+  border-color: var(--espresso);
+  color: var(--espresso);
+}
+
+.collection-aarna__tab.is-active {
+  background: var(--deep-forest);
+  color: var(--warm-ivory);
+  border-color: var(--deep-forest);
+}
+
+.collection-aarna__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.collection-aarna__row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 44px 28px 1fr auto auto;

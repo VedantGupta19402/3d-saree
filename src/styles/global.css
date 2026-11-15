@@ -809,3 +809,104 @@ main#scroll-root.is-inspecting {
   width: 100%;
   display: grid;
   grid-template-columns: 44px 28px 1fr auto auto;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.collection-aarna__row:hover,
+.collection-aarna__row.is-active {
+  background: rgba(25, 60, 50, 0.04);
+  transform: translateX(4px);
+}
+
+.collection-aarna__n {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--muted-olive);
+}
+
+.collection-aarna__swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(48, 39, 32, 0.2);
+}
+
+.collection-aarna__name {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(19px, 2vw, 24px);
+  color: var(--espresso);
+}
+
+.collection-aarna__meta {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.collection-aarna__price {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--deep-forest);
+}
+
+.collection-aarna__cta-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.collection-aarna__row:hover .collection-aarna__cta-label {
+  color: var(--deep-forest);
+  opacity: 1;
+}
+
+.collection-aarna__arrow {
+  transition: transform 0.3s;
+}
+
+.collection-aarna__row:hover .collection-aarna__arrow {
+  transform: translateX(4px);
+}
+
+/* ───────── 03. Craft & Texture Section ───────── */
+
+.craft-aarna__panel {
+  background: var(--deep-forest);
+  color: var(--warm-ivory);
+  padding: clamp(40px, 6vw, 84px);
+  border-radius: var(--radius);
+}
+
+.craft-aarna__panel .display {
+  color: var(--warm-ivory);
+}
+
+.craft-aarna__panel .display em {
+  color: var(--sandstone);
+}
+
+.craft-aarna__panel .body {
+  color: rgba(244, 240, 232, 0.75);
+}
+
+.craft-aarna__panel .eyebrow {
+  color: var(--sandstone);
+}
+
+.craft-aarna__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 40px;

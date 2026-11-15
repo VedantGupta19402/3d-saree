@@ -78,3 +78,83 @@ export default function AarnaBagDrawer() {
 
                   {/* Quantity Stepper */}
                   <div className="bag-item__actions">
+                    <div className="qty-stepper">
+                      <button
+                        className="qty-btn"
+                        onClick={() => updateQuantity(item.cartItemId, -1)}
+                        aria-label="Decrease quantity"
+                      >
+                        −
+                      </button>
+                      <span className="qty-val">{item.quantity}</span>
+                      <button
+                        className="qty-btn"
+                        onClick={() => updateQuantity(item.cartItemId, 1)}
+                        aria-label="Increase quantity"
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    <button
+                      className="bag-item__remove"
+                      onClick={() => removeFromBag(item.cartItemId)}
+                      aria-label={`Remove ${item.name}`}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Footer / Summary */}
+        {bag.length > 0 && (
+          <div className="bag-drawer__footer">
+            <div className="bag-summary">
+              <div className="bag-summary__row">
+                <span>Atelier Subtotal</span>
+                <span>{currency === 'USD' ? formatPrice(subtotal) : formatInr(subtotal)}</span>
+              </div>
+              <div className="bag-summary__row bag-summary__shipping">
+                <span>Insured International Courier</span>
+                <span className="bag-complimentary">Complimentary</span>
+              </div>
+              <div className="bag-summary__row bag-summary__total">
+                <span>Estimated Total</span>
+                <span className="bag-total-val">
+                  {currency === 'USD' ? formatPrice(subtotal) : formatInr(subtotal)}
+                </span>
+              </div>
+            </div>
+
+            <div className="bag-drawer__cta-block">
+              <button
+                className="btn btn--solid btn--wide"
+                onClick={() => {
+                  toggleBag(false)
+                  toggleEnquiry(true)
+                }}
+              >
+                Schedule Bespoke Order & Consultation
+              </button>
+              <button
+                className="btn btn--text btn--wide"
+                onClick={clearBag}
+              >
+                Clear Entire Bag
+              </button>
+            </div>
+
+            <p className="bag-drawer__guarantee">
+              All creations are individually tailored and shipped in climate-regulated archival cases.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+

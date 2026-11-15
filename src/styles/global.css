@@ -912,60 +912,207 @@ main.is-inspecting * {
   z-index: 100;
   display: grid;
   place-items: center;
-  background: var(--ink);
+  background: transparent;
   color: var(--paper);
-  clip-path: inset(0% 0% 0% 0%);
+  overflow: hidden;
 }
+
+.loader__curtain {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50.5%;
+  background: radial-gradient(circle at 50% 50%, #262320 0%, #151311 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.loader__curtain--top {
+  top: 0;
+  border-bottom: 1px solid rgba(246, 242, 236, 0.08);
+}
+
+.loader__curtain--bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(246, 242, 236, 0.08);
+}
+
 .loader__inner {
-  width: min(520px, calc(100vw - 48px));
+  position: relative;
+  z-index: 2;
+  width: min(540px, calc(100vw - 48px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
+
+.loader__crest {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+}
+
+.loader__crest-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: loaderSpin 24s linear infinite;
+  color: #d39672;
+}
+
+@keyframes loaderSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loader__crest-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--paper);
+  opacity: 0.92;
+}
+
+.loader__crest-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.loader__tag {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #c49977;
+  margin: 0 0 16px;
+  font-weight: 500;
+}
+
 .loader__brand {
   display: flex;
+  justify-content: center;
   gap: 0.22em;
-  margin: 0 0 32px;
+  margin: 0 0 24px;
   font-family: var(--serif);
-  font-size: clamp(56px, 9vw, 104px);
+  font-size: clamp(52px, 8.5vw, 92px);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
+
 .loader__mask {
   display: block;
   overflow: hidden;
   padding-bottom: 0.08em;
 }
+
 .loader__word {
   display: block;
+  background: linear-gradient(180deg, #ffffff 20%, #d8d0c5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.loader__brand em {
-  color: #d39672;
+
+.loader__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(246, 242, 236, 0.05);
+  border: 1px solid rgba(246, 242, 236, 0.1);
+  margin-bottom: 28px;
 }
-.loader__meta {
+
+.loader__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d39672;
+  box-shadow: 0 0 8px #d39672;
+  animation: loaderPulse 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes loaderPulse {
+  from { opacity: 0.4; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+.loader__phase {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(246, 242, 236, 0.75);
+}
+
+.loader__progress-wrap {
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.loader__track {
+  width: 100%;
+  height: 3px;
+  background: rgba(246, 242, 236, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.loader__bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #a8603f, #e5b38b, #f6f2ec);
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(229, 179, 139, 0.5);
+}
+
+.loader__numbers {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(246, 242, 236, 0.6);
-  margin-bottom: 14px;
+  width: 100%;
 }
+
+.loader__label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(246, 242, 236, 0.45);
+}
+
+.loader__count-group {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
 .loader__count {
   font-family: var(--serif);
-  font-size: 28px;
-  letter-spacing: 0;
+  font-size: 32px;
+  line-height: 1;
   color: var(--paper);
   font-variant-numeric: tabular-nums;
 }
-.loader__track {
-  height: 1px;
-  background: rgba(246, 242, 236, 0.18);
-  overflow: hidden;
+
+.loader__percent {
+  font-size: 14px;
+  color: #c49977;
+  font-family: var(--sans);
 }
-.loader__bar {
-  height: 100%;
-  background: var(--paper);
-  transform: scaleX(0);
-  transform-origin: left;
+
+.loader__subtext {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(246, 242, 236, 0.35);
+  margin: 0;
 }
 
 /* ───────── Responsive ───────── */
